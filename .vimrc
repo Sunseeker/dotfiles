@@ -1,3 +1,5 @@
+"" to reload settings in vim use :so ~/.vimrc command
+
 set nu    			    " show line numbers
 colorscheme evening		"" Color Scheme
 set laststatus=2 		" Always show the statusline
@@ -98,3 +100,6 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
+
+nnoremap <F3> :set hlsearch!<CR>
+
