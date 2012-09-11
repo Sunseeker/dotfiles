@@ -267,7 +267,7 @@ READNULLCMD=${PAGER}
 alias grep='grep --color=auto -i'
 
 # редактор по дефолту
-export EDITOR=mcedit
+export EDITOR=vim
 
 # более человекочитаемые df и du
 alias df='df -h'
@@ -377,14 +377,6 @@ alias delspacecomm="sed '/ *#/d; /^ *$/d' $1"
 # создаем пароль из 6символов
 alias mkpass="head -c6 /dev/urandom | xxd -ps"
 
-export CVSROOT=:pserver:slay@cvs:/home/src
-export PATH=/usr/lib/distcc/bin:$PATH:/usr/local/H-linux86/bin:/usr/wine-ln/bin:/usr/baget-tools/H-linux86/bin:/usr/lib/jvm/java-6-sun-1.6.0.12/bin/:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools
-export G_BROKEN_FILENAMES=1
-#export COLUMNS=132
-#export CCACHE_PREFIX="distcc"
-#export CC="ccache gcc"
-export SVN_EDITOR="mcedit"
-
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -393,13 +385,10 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-JAVA_HOME="/usr/lib/java"
-export JAVA_HOME
-#export LANG=ru_RU.UTF-8
-
 export MANPAGER=less
 
 g() {
     git "$*" | tig
 }
 
+export PATH=$PATH:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools
