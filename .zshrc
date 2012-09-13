@@ -12,6 +12,8 @@
 bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
 
+source ~/.zsh-git-prompt/zshrc.sh
+
 #
 # Use hard limits, except for a smaller stack and no core dumps
 unlimit
@@ -28,7 +30,8 @@ freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
 
 #PROMPT=$'%{\e[1;32m%}%n@%m:%{\e[1;34m%}[%~]$%{\e[0m%} '
 #RPROMPT=$'%{\e[1;32m%}[%{\e[1;33m%}%T%{\e[1;32m%}]%{\e[0m%}'
-PROMPT=$'%{\e[1;32m%}%{\e[1;33m%}%T%{\e[1;32m%} '$'%{\e[1;32m%}%n@%m:%{\e[1;34m%}[%1d]$%{\e[0m%} '
+#PROMPT=$'%{\e[1;32m%}%{\e[1;33m%}%T%{\e[1;32m%} '$'%{\e[1;32m%}%n@%m:%{\e[1;34m%}[%1d]$%{\e[0m%} '
+PROMPT=$'%{\e[1;32m%}%{\e[1;33m%}%T%{\e[1;32m%} '$'%{\e[1;32m%}%n@%m:%{\e[1;34m%}[%1d]%{\e[0m%}$(git_super_status)%{\e[1;34m%}$%{\e[0m%} '
 
 # Позволяем разворачивать сокращенный ввод, к примеру cd /u/sh в /usr/share
 autoload -Uz compinit
@@ -68,7 +71,6 @@ zle -N dialogrun
 #autoload -U tetris 
 #zle -N tetris 
 #bindkey ^T  tetris
-
 
 # Autoload zsh modules when they are referenced
 zmodload -a zsh/stat stat
@@ -188,7 +190,6 @@ preexec()
 #	    screen(-bce|.linux)) print -Pn "\ek<$1> [%~]\e\" && print -Pn "\e]0;<$1> [%~] %m (screen)\a" ;; #заголовок для скрина
 	esac
 }
-
 
 ####  функции
 # распаковка архива
@@ -313,7 +314,6 @@ alias -s {xls,doc,,rtf,ppt,odt,sxw}=soffice
 alias -s {png,gif,jpg,jpeg}=feh
 alias -s {pdf,djvu}=evince
 
-
 # без иксов
 [[ -z $DISPLAY ]] && {
     alias -s {odt,doc,sxw,xls,doc,rtf}=catdoc
@@ -392,3 +392,6 @@ g() {
 }
 
 export PATH=$PATH:/opt/android-sdk-linux/tools:/opt/android-sdk-linux/platform-tools
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
