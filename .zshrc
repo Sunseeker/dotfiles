@@ -392,4 +392,6 @@ g() {
     git "$*" | tig
 }
 
+#keychain -Q -q --nogui ~/.ssh/yury
+#[ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
 
