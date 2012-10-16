@@ -104,3 +104,5 @@ command! OpenChangedFiles :call OpenChangedFiles()
 
 nnoremap <F3> :set hlsearch!<CR>
 nnoremap <F2> :w<CR>
+nnoremap <F10> :q<CR>
+
