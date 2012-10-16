@@ -54,7 +54,7 @@ set laststatus=2
     set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
-set backupdir=~/tmp
+set backupdir=~/.vim-tmp-files
 set linespace=0		" No extra spaces between rows
 set showmatch		" show matching brackets/parenthesis
 set incsearch		" find as you type search
