@@ -694,7 +694,7 @@ regex/\.xz$
 # Default target for anything not described above
 default/*
 	Open=%var{EDITOR:vim} %f
-	View=%var{EDITOR:vim} %f
+	View=
 
 
 ### EOF ###
