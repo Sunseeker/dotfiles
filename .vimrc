@@ -55,6 +55,7 @@ set laststatus=2
 endif
 
 set backupdir=~/.vim-tmp-files
+set undodir=~/.vim-tmp-files
 set linespace=0		" No extra spaces between rows
 set showmatch		" show matching brackets/parenthesis
 set incsearch		" find as you type search
@@ -87,7 +88,7 @@ let mapleader = "," " setting leader to ,
 " Enable fancy mode
 let g:Powerline_symbols = 'fancy' " Powerline
 
-set colorcolumn=120 " line to show 120 character mark
+set colorcolumn=140
 "set cursorline " shows the horizontal cursor line
 
 "Badass Functions
