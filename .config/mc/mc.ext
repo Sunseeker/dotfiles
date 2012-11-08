@@ -522,11 +522,11 @@ regex/\.([hH][tT][mM][lL]?)$
 
 # StarOffice 5.2
 shell/.sdw
-	Open=(ooffice %f &)
+	Open=(loffice %f &)
 
 # StarOffice 6 and OpenOffice.org formats
 regex/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
-	Open=(oowriter > /dev/null 2>&1 %f &)
+	Open=(lowriter > /dev/null 2>&1 %f &)
 	View=%view{ascii} odt2txt %f
 
 # AbiWord
@@ -535,10 +535,10 @@ shell/.abw
 
 # Microsoft Word Document
 regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 	View=%view{ascii} antiword -t %f || catdoc -w %f || word2x -f text %f - || strings %f
 type/^Microsoft\ Word
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 	View=%view{ascii} antiword -t %f || catdoc -w %f || word2x -f text %f - || strings %f
 
 # RTF document
@@ -547,23 +547,23 @@ regex/\.([dD][oO][cC][xX])$
 
 # RTF document
 regex/\.([rR][tT][fF])$
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 
 # XLSX document
 regex/\.([xX][lL][sS][xX])$
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 
 # Microsoft Excel Worksheet
 regex/\.([xX][lL][sSwW])$
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 type/^Microsoft\ Excel
-	Open=(oowriter %f >/dev/null 2>&1 &)
+	Open=(lowriter %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 
 # Use OpenOffice.org to open any MS Office documents
 type/^Microsoft\ Office\ Document
-	Open=(ooffice %f &)
+	Open=(loffice %f &)
 
 # Framemaker
 type/^FrameMaker
