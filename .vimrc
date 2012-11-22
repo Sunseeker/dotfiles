@@ -107,3 +107,6 @@ nnoremap <F3> :set hlsearch!<CR>
 nnoremap <F2> :w<CR>
 nnoremap <F10> :q<CR>
 
+au BufRead,BufNewFile *.qml set filetype=qml
+au! Syntax qml source ~/.vim/syntax/qml.vim
+
