@@ -17,7 +17,7 @@ set spell 	 		    		" spell checking on
 
 
 "" Whitespace
-set nowrap " don't wrap lines
+"set nowrap " don't wrap lines
 set tabstop=4 shiftwidth=4 " a tab is two spaces (or set this to 4)
 set expandtab " use spaces, not tabs
 set backspace=indent,eol,start " backspace through everything in insert mode
@@ -109,4 +109,9 @@ nnoremap <F10> :q<CR>
 
 au BufRead,BufNewFile *.qml set filetype=qml
 au! Syntax qml source ~/.vim/syntax/qml.vim
+
+" A new Vim package system
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+call pathogen#helptags()
 
