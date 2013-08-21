@@ -115,3 +115,5 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
 
+let NERDTreeShowHidden=1   " show hidden files in NERDTree plugin
+:nmap \e :NERDTreeToggle<CR>
