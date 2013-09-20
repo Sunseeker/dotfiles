@@ -54,8 +54,14 @@ set laststatus=2
     set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
 endif
 
-set backupdir=~/.vim-tmp-files
-set undodir=~/.vim-tmp-files
+if has ('win32')
+    set dir=C:\\Users\\ysamokhvalov\\_vim-tmp-files " dir for .swp files
+    set backupdir=C:\\Users\\ysamokhvalov\\_vim-tmp-files
+    set undodir=C:\Users\ysamokhvalov\_vim-tmp-files
+else
+    set backupdir=~/.vim-tmp-files
+    set undodir=~/.vim-tmp-files
+endif 
 set linespace=0		" No extra spaces between rows
 set showmatch		" show matching brackets/parenthesis
 set incsearch		" find as you type search
@@ -70,7 +76,8 @@ set scrolljump=5 	" lines to scroll when cursor leaves screen
 set scrolloff=3 	" minimum lines to keep above and below cursor
 
 " Formatting {
-set nowrap       " wrap long lines
+set wrap       " wrap long lines
+set textwidth=120 " text width for wrapping
 set autoindent   " indent at the same level of the previous line
 set shiftwidth=4 " use indents of 4 spaces
 set expandtab    " tabs are spaces, not tabs
@@ -88,7 +95,7 @@ let mapleader = "," " setting leader to ,
 " Enable fancy mode
 let g:Powerline_symbols = 'fancy' " Powerline
 
-set colorcolumn=140
+" set colorcolumn=140
 "set cursorline " shows the horizontal cursor line
 
 "Badass Functions
@@ -117,3 +124,17 @@ call pathogen#helptags()
 
 let NERDTreeShowHidden=1   " show hidden files in NERDTree plugin
 :nmap \e :NERDTreeToggle<CR>
+
+" gvim specific settings (launch)
+if has("win32") 
+    set lines=50
+    set columns=140
+    set clipboard=unnamed " integrate with windows clipboard
+endif
+
+
+" setting font with cyryllic support in gvim for windows
+if !has("gui gtk2") && !has("gui kde")
+   set guifont=Lucida_Console:h10:cANSI
+endif
+
