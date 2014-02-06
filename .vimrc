@@ -135,6 +135,14 @@ endif
 
 " setting font with cyryllic support in gvim for windows
 if !has("gui gtk2") && !has("gui kde")
-   set guifont=Lucida_Console:h10:cANSI
+   set guifont=Lucida_Console:h14:cANSI
+endif
+
+" setting proper gui font for Mac
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        set guifont=Lucida_Console:h13
+    endif
 endif
 
