@@ -142,7 +142,24 @@ endif
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-        set guifont=Lucida_Console:h13
+        set guifont=Consolas:h14
     endif
 endif
+
+" create dir on file saving if doesn't exist
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
+" change working dir to the current file path (only for the current buffer)
+autocmd BufEnter * silent! lcd %:p:h
 
