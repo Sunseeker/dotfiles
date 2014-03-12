@@ -25,6 +25,7 @@
 
 [alias]
     ds = diff --staged # git ds - diff your staged changes == review before committing.
+    latest-by-branch = for-each-ref --sort=-committerdate --format='%(refname:short) %(committerdate:short)'
     st = status -sb         # smarter status - include tag and branch info
     fup = log --since '1 day ago' --oneline --author <YOUR_EMAIL>  # I know what you did yesterday - great for follow-ups
     ls = log --pretty=format:"%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]" --decorate --date=short  # pretty one-line log with tags, branches and authors
@@ -49,11 +50,11 @@
 
     # stash shortcuts
     sl = stash list
-    sa = stash apply
-    ss = stash save
+    sp = stash pop
+    sd = stash drop
 
     # log related
-    l = log 
+    l = log --oneline --decorate
     lh = log --graph
     la = !git lh --date-order --all 2> /dev/null
     lb = log --graph --simplify-by-decoration
