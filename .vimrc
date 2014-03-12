@@ -84,7 +84,6 @@ set expandtab    " tabs are spaces, not tabs
 set tabstop=4    " an indentation every four col
 " }
 
-
 filetype plugin indent on 	" Automatically detect file types.
 syntax on 			" syntax highlighting
 set mouse=a			" automatically enable mouse usage
@@ -162,4 +161,9 @@ augroup END
 
 " change working dir to the current file path (only for the current buffer)
 autocmd BufEnter * silent! lcd %:p:h
+
+if &diff
+    " diff mode
+    set diffopt+=iwhite
+endif
 
