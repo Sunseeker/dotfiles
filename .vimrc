@@ -1,36 +1,48 @@
 "" to reload settings in vim use :so ~/.vimrc command
 
 set nu    			    " show line numbers
-colorscheme evening		"" Color Scheme
-set laststatus=2 		" Always show the statusline
-
+set linespace=0		" No extra spaces between rows
+set showmatch		" show matching brackets/parenthesis
+set incsearch		" find as you type search
+set hlsearch		" highlight search terms
+set winminheight=0	" windows can be 0 line high
+set ignorecase 		" searches are case insensitive...
+set smartcase 		" ... unless they contain at least one capital letter
+set wildmenu		" show list instead of just completing
+set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
+set whichwrap=b,s,h,l,<,>,[,] " backspace and cursor keys wrap to
+set scrolljump=5 	" lines to scroll when cursor leaves screen
+set scrolloff=3 	" minimum lines to keep above and below cursor
+set wrap            " wrap long lines (or set nowrap)
+set textwidth=0     " text width for wrapping (0 - physical wrapping is turned off)
+set autoindent      " indent at the same level of the previous line
+set mouse=a			" automatically enable mouse usage
 set nocompatible 		" choose no compatibility with legacy vi
-syntax enable
 set encoding=utf-8
 set showcmd 		    	" display incomplete commands
-filetype plugin indent on 	" load file type plugins + indentation
-
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 set virtualedit=onemore 		" allow for cursor beyond last character
 set history=1000 				" Store a ton of history (default is 20)
 set spell 	 		    		" spell checking on
-
-
-"" Whitespace
-"set nowrap " don't wrap lines
-set tabstop=4 shiftwidth=4 " a tab is two spaces (or set this to 4)
+set tabstop=4 
+set shiftwidth=4 " a tab is two spaces (or set this to 4)
 set expandtab " use spaces, not tabs
 set backspace=indent,eol,start " backspace through everything in insert mode
-
 set backup 			        " backups are nice ...
 set undofile			    " so is persistent undo ...
 set undolevels=1000 		" maximum number of changes that can be undone
 set undoreload=10000 		" maximum number lines to save for undo on a buffer reload
+set showmode                " display the current mode
+" set colorcolumn=140
+"set cursorline " shows the horizontal cursor line
+
+syntax enable
+filetype plugin indent on 	" load file type plugins + indentation
+colorscheme evening		" Color Scheme
 
 au BufWinLeave * silent! mkview   " make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview " make vim load view (state) (folds, cursor, etc)
 
-set showmode " display the current mode
 hi cursorline guibg=#333333 " highlight bg color of current line
 hi CursorColumn guibg=#333333 " highlight cursor
 
@@ -40,10 +52,8 @@ if has('cmdline_info')
     set showcmd " show partial commands in status line and selected characters/lines in visual mode
 endif
 
-
 if has('statusline')
 set laststatus=2
-
     " Broken down into easily includeable segments
     set statusline=%<%f\ " Filename
     set statusline+=%w%h%m%r " Options
@@ -62,40 +72,12 @@ else
     set backupdir=~/.vim-tmp-files
     set undodir=~/.vim-tmp-files
 endif 
-set linespace=0		" No extra spaces between rows
-set showmatch		" show matching brackets/parenthesis
-set incsearch		" find as you type search
-set hlsearch		" highlight search terms
-set winminheight=0	" windows can be 0 line high
-set ignorecase 		" searches are case insensitive...
-set smartcase 		" ... unless they contain at least one capital letter
-set wildmenu		" show list instead of just completing
-set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
-set whichwrap=b,s,h,l,<,>,[,] " backspace and cursor keys wrap to
-set scrolljump=5 	" lines to scroll when cursor leaves screen
-set scrolloff=3 	" minimum lines to keep above and below cursor
-
-" Formatting {
-set wrap       " wrap long lines
-set textwidth=120 " text width for wrapping
-set autoindent   " indent at the same level of the previous line
-set shiftwidth=4 " use indents of 4 spaces
-set expandtab    " tabs are spaces, not tabs
-set tabstop=4    " an indentation every four col
-" }
-
-filetype plugin indent on 	" Automatically detect file types.
-syntax on 			" syntax highlighting
-set mouse=a			" automatically enable mouse usage
 
 "" Mapping
 let mapleader = "," " setting leader to ,
 
 " Enable fancy mode
 let g:Powerline_symbols = 'fancy' " Powerline
-
-" set colorcolumn=140
-"set cursorline " shows the horizontal cursor line
 
 "Badass Functions
 function! OpenChangedFiles()
@@ -108,21 +90,21 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
-
-nnoremap <F3> :set hlsearch!<CR>
-nnoremap <F2> :w<CR>
+            
+" Functional keys mappings
+nnoremap <F2>  :w<CR>
 nnoremap <F10> :q<CR>
+nmap     <F3>  :NERDTreeToggle<CR>
+nmap     <F4>  :TagbarToggle<CR>
 
 au BufRead,BufNewFile *.qml set filetype=qml
 au! Syntax qml source ~/.vim/syntax/qml.vim
 
 " A new Vim package system
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+execute pathogen#infect()
+execute pathogen#helptags()
 
 let NERDTreeShowHidden=1   " show hidden files in NERDTree plugin
-:nmap \e :NERDTreeToggle<CR>
 
 " gvim specific settings (launch)
 if has("win32") 
@@ -133,7 +115,7 @@ endif
 
 
 " setting font with cyryllic support in gvim for windows
-if !has("gui gtk2") && !has("gui kde")
+if !has("gui gtk2") && !has("gui kde") && has("win32")
    set guifont=Lucida_Console:h14:cANSI
 endif
 
@@ -146,7 +128,7 @@ if has("unix")
 endif
 
 " create dir on file saving if doesn't exist
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -167,3 +149,39 @@ if &diff
     set diffopt+=iwhite
 endif
 
+"Use TAB to complete when typing words, else inserts TABs as usual.
+"Uses dictionary and source files to find matching words to complete.
+
+"See help completion for source,
+"Note: usual completion is on <C-n> but more trouble to press all the time.
+"Never type the same word twice and maybe learn a new spellings!
+"Use the Linux dictionary when spelling is in doubt.
+"Window users can copy the file to their machine.
+"function! Tab_Or_Complete()
+"  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+"    return "\<C-N>"
+"  else
+"    return "\<Tab>"
+"  endif
+"endfunction
+":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+" Map ctrl-movement keys to window switching
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+
+" Switch to alternate file
+map <C-Tab> :bnext<cr>
+map <C-S-Tab> :bprevious<cr>
+
+" Save all buffers on VIM focus lost though silently ignore unnamed buffers (those won't be saved)
+:au FocusLost * silent! :wa
+let g:molokai_original = 1
+
+au FileType go set makeprg=go\ build\ ./...
+nmap<F5> :make<CR>:copen<CR>
+
+" regenerate ctags automatically when saving Go source files
+au BufWritePost *.go silent! !ctags -R &
