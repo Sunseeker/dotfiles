@@ -1,6 +1,35 @@
 "" to reload settings in vim use :so ~/.vimrc command
 
-set nu    			    " show line numbers
+filetype off        " required for Vundle
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/some/path/here')
+
+Plugin 'gmarik/Vundle.vim'  " let Vundle manage Vundle, required
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-dispatch'
+Plugin 'fatih/vim-go'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on 	 " load file type plugins + indentation, required
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+
+
+set nu    			" show line numbers
 set linespace=0		" No extra spaces between rows
 set showmatch		" show matching brackets/parenthesis
 set incsearch		" find as you type search
@@ -37,7 +66,6 @@ set showmode                " display the current mode
 "set cursorline " shows the horizontal cursor line
 
 syntax enable
-filetype plugin indent on 	" load file type plugins + indentation
 colorscheme evening		" Color Scheme
 
 au BufWinLeave * silent! mkview   " make vim save view (state) (folds, cursor, etc)
@@ -99,10 +127,6 @@ nmap     <F4>  :TagbarToggle<CR>
 
 au BufRead,BufNewFile *.qml set filetype=qml
 au! Syntax qml source ~/.vim/syntax/qml.vim
-
-" A new Vim package system
-execute pathogen#infect()
-execute pathogen#helptags()
 
 let NERDTreeShowHidden=1   " show hidden files in NERDTree plugin
 
