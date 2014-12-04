@@ -167,6 +167,8 @@ augroup END
 
 " change working dir to the current file path (only for the current buffer)
 autocmd BufEnter * silent! lcd %:p:h
+" close vim if the only window left open is a NERDTree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 if &diff
     " diff mode
