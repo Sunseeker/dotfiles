@@ -3,12 +3,14 @@
 	email = ysamokhvalov@switch.tv
 [core]
 	excludesfile = /Users/yury/.gitignore_global
+	editor = mvim -f
 
 [merge]
     mergetool = mvim
+	tool = diffconflicts
 
 [mergetool "mvim"]
-    cmd = /Applications/mvim \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+    cmd = mvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 
 [difftool "sourcetree"]
 	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
@@ -62,3 +64,7 @@
     h = !git --no-pager log --graph -n 15
     a = !git --no-pager la -n 15
 
+[mergetool "diffconflicts"]
+	cmd = ~/dotfiles/bin/diffconflicts mvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
+	keepBackup = false
