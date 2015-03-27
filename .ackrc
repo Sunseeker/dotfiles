@@ -1,0 +1,10 @@
+--ignore-dir=obj
+--ignore-dir=bin
+--ignore-file=is:.tags
+--ignore-file=is:.keep
+--color
+--follow
+--group
+--sort-files
+-s
+--with-filename
